@@ -25,9 +25,9 @@ pip install -r requirements.txt
 
 ### Code Flow
 
-  Upload Video → Interrogation recordings are uploaded to AWS S3 (demo videos already available).
+  **Upload Video → Interrogation recordings are uploaded to AWS S3 (demo videos already available).**
   
-  Transcription → Videos are converted into text reports using AWS Transcribe
+  **Transcription → Videos are converted into text reports using AWS Transcribe**
   (function: transcribe_interrogation_video_to_text).
   
   Chunking → Reports are split into smaller chunks using LangChain RecursiveCharacterTextSplitter (chunk size = 200).
@@ -36,7 +36,7 @@ pip install -r requirements.txt
   
   Storage in TiDB → Chunks + embeddings are stored in a TiDB Vector Table (one table per criminal).
   
-  Querying →
+  **Querying** →
   
   Officer enters a query (e.g., “Did the suspect mention the weapon?”).
   
