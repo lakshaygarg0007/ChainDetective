@@ -1,29 +1,29 @@
-Prerequisites
+# 🚨 ChainDetective  
 
-Python 3.9+ environment 
+ChainDetective is an AI-powered investigative assistant that helps law enforcement analyze interrogation videos, generate searchable reports, and retrieve insights instantly using **TiDB Serverless**, **AWS Transcribe**, and **Google Gemini**. It also integrates with the **FBI Most Wanted API** and can notify **nearest police stations** via **Twilio SMS/WhatsApp alerts**.  
 
-TiDB Serverless on TiDB Cloud (for vector search).
+🔗 **Live Demo:** [https://chaindetective.onrender.com](https://chaindetective.onrender.com)  
 
-AWS Account with:
+---
 
-S3 bucket (for video storage).
+## ⚙️ Prerequisites  
 
-Transcribe service enabled (for video-to-text).
+- **Python 3.9+ environment**  
+- **TiDB Serverless** on TiDB Cloud (for vector search).  
+- **AWS Account** with:  
+  - S3 bucket (for video storage).  
+  - Transcribe service enabled (for video-to-text).  
+- **API Keys**:  
+  - Hugging Face token (for embeddings).  
+  - Google Gemini API key (for LLM queries).  
+  - Twilio credentials (for SMS/WhatsApp alerts).  
 
-API Keys:
-
-Hugging Face token (for embeddings).
-
-Google Gemini API key (for LLM queries).
-
-Twilio credentials (if using SMS/WhatsApp alerts).
-
-
-Install dependencies:
+### Install Dependencies  
+```bash
 pip install -r requirements.txt
 
 
-Code Flow
+🔄 Code Flow
 
 Upload Video → Interrogation recordings are uploaded to AWS S3 (demo videos already available).
 
@@ -38,7 +38,7 @@ Storage in TiDB → Chunks + embeddings are stored in a TiDB Vector Table (one t
 
 Querying →
 
-Officer enters a query (e.g., "Did the suspect mention the weapon?").
+Officer enters a query (e.g., “Did the suspect mention the weapon?”).
 
 Query → converted into embedding.
 
@@ -47,13 +47,13 @@ Vector Search performed in TiDB to find top-k relevant chunks
 
 LLM Processing → Similar chunks + query are sent to Gemini LLM for a final refined answer.
 
-Alerting (Optional) → If suspect matches FBI most wanted, nearest police stations are informed via Twilio SMS/WhatsApp API.
+Alerting (Optional) → If suspect matches FBI Most Wanted, nearest police stations are informed via Twilio SMS/WhatsApp API.
 
-Testing
 
-    Investigation officer just need to input criminal name and query, and he/she will get result. Rest all process are automatic
+🖥️ Testing via UI
 
-Testing by UI
-
-    Install requriments by pip install -r requirements.txt
-    On Local Please run FLASK SERVER By set FLASK_APP=app.py and then flask run
+Install dependencies:
+    pip install -r requirements.txt
+Run Flask server locally:
+    set FLASK_APP=app.py
+    flask run
