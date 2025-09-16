@@ -53,7 +53,11 @@ pip install -r requirements.txt
 ### Testing via UI
 
 Install dependencies:
+```
     pip install -r requirements.txt
+```
 Run Flask server locally:
+```
     set FLASK_APP=app.py
     flask run
+```
