@@ -1,0 +1,17 @@
+langchain-google-genai>=0.0.5
+langchain-core>=0.1.15
+langchain-community>=0.0.16
+langchain>=0.1.0
+sentence-transformers>=2.2.2
+mysql-connector-python>=8.2.0
+python-dotenv>=1.0.0
+langchain-text-splitters>=0.0.1
+tiktoken>=0.5.1
+tidb-vector
+boto3
+sagemaker
+sqlalchemy
+Flask
+twilio
+tidb_vector
+dotenv
