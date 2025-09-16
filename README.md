@@ -21,9 +21,9 @@ ChainDetective is an AI-powered investigative assistant that helps law enforceme
 ### Install Dependencies  
 ```bash
 pip install -r requirements.txt
+```
 
-
-🔄 Code Flow
+### Code Flow
 
 Upload Video → Interrogation recordings are uploaded to AWS S3 (demo videos already available).
 
@@ -50,7 +50,7 @@ LLM Processing → Similar chunks + query are sent to Gemini LLM for a final ref
 Alerting (Optional) → If suspect matches FBI Most Wanted, nearest police stations are informed via Twilio SMS/WhatsApp API.
 
 
-🖥️ Testing via UI
+### Testing via UI
 
 Install dependencies:
     pip install -r requirements.txt
