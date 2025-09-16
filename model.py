@@ -28,30 +28,6 @@ aws_region = os.getenv("AWS_REGION")
 aws_s3_bucket = os.getenv("AWS_S3_BUCKET")
 
 
-# Sentence transformer model
-model = SentenceTransformer("sentence-transformers/msmarco-MiniLM-L12-cos-v5", trust_remote_code=True)
-
-
-# ---------------- EMBEDDINGS WRAPPER ----------------
-class SentenceTransformerEmbeddings(Embeddings):
-    def __init__(self, model):
-        self.model = model
-
-    def embed_documents(self, texts):
-        return self.model.encode(texts, convert_to_numpy=True).tolist()
-
-    def embed_query(self, text):
-        return self.model.encode([text], convert_to_numpy=True)[0].tolist()
-
-
-embeddings = SentenceTransformerEmbeddings(model)
-
-
-# ---------------- HELPERS ----------------
-def text_to_embedding(text):
-    return model.encode(text, convert_to_numpy=True).tolist()
-
-
 def find_similar_case_review_data(query_string, db):
     if not isinstance(db, TiDBVectorClient):
         raise TypeError(f"Expected TiDBVectorClient, got {type(db)}")
@@ -169,13 +145,16 @@ def perform_query_from_ui(query_string, criminal_name):
         )
 
     result =  perform_query(query_string, db)
-    fbi_matches = check_fbi_most_wanted(criminal_name)
-    if fbi_matches:
-        print(f"⚠️ Suspect {criminal_name} found in FBI Most Wanted:")
-        for match in fbi_matches:
-            print(match)
+    try:
+        fbi_matches = check_fbi_most_wanted(criminal_name)
+        if fbi_matches:
+            print(f"⚠️ Suspect {criminal_name} found in FBI Most Wanted:")
+            for match in fbi_matches:
+                print(match)
 
-    inform_police_stations(criminal_name)
+        inform_police_stations(criminal_name)
+    except Exception as e:
+        print(f"Error Occurred {e}")
 
     return {"llm_result": result, "fbi_matches": fbi_matches}
 
