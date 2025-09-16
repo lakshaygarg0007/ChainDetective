@@ -25,29 +25,29 @@ pip install -r requirements.txt
 
 ### Code Flow
 
-  **Upload Video → Interrogation recordings are uploaded to AWS S3 (demo videos already available).**
+  - Upload Video → Interrogation recordings are uploaded to AWS S3 (demo videos already available).**
   
-  **Transcription → Videos are converted into text reports using AWS Transcribe**
+  - Transcription → Videos are converted into text reports using AWS Transcribe**
   (function: transcribe_interrogation_video_to_text).
   
-  Chunking → Reports are split into smaller chunks using LangChain RecursiveCharacterTextSplitter (chunk size = 200).
+  - Chunking → Reports are split into smaller chunks using LangChain RecursiveCharacterTextSplitter (chunk size = 200).
   
-  Embeddings → Each chunk is converted into embeddings using SentenceTransformer (Hugging Face model).
+  - Embeddings → Each chunk is converted into embeddings using SentenceTransformer (Hugging Face model).
   
-  Storage in TiDB → Chunks + embeddings are stored in a TiDB Vector Table (one table per criminal).
+  - Storage in TiDB → Chunks + embeddings are stored in a TiDB Vector Table (one table per criminal).
   
-  **Querying** →
+  - Querying** →
   
-  Officer enters a query (e.g., “Did the suspect mention the weapon?”).
+  - Officer enters a query (e.g., “Did the suspect mention the weapon?”).
   
-  Query → converted into embedding.
+  - Query → converted into embedding.
   
-  Vector Search performed in TiDB to find top-k relevant chunks
+  - Vector Search performed in TiDB to find top-k relevant chunks
   (function: find_similar_case_review_data).
   
-  LLM Processing → Similar chunks + query are sent to Gemini LLM for a final refined answer.
+  - LLM Processing → Similar chunks + query are sent to Gemini LLM for a final refined answer.
   
-  Alerting (Optional) → If suspect matches FBI Most Wanted, nearest police stations are informed via Twilio SMS/WhatsApp API.
+  - Alerting (Optional) → If suspect matches FBI Most Wanted, nearest police stations are informed via Twilio SMS/WhatsApp API.
 
 
 ### Testing via UI
